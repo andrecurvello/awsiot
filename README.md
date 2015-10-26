@@ -7,5 +7,5 @@ The Renesas RX63N AWS IoT Starter Kit has the following contents:
 * USB to mini-USB Cable
 * Preloaded with Micrium's Smart Home Gateway Demo
 
-![YRDKRX63N-AWS](./img/yrdkrx63n_aws.jpg =250px)
+![YRDKRX63N-AWS](./img/yrdkrx63n_aws.jpg =250x)
 
