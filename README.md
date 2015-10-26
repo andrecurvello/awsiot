@@ -46,4 +46,4 @@ In order to run the Smart Home Gateway Demo on your own AWS account you need the
 1. Import the Smart Home Gateway project into IAR
     * Navigate to File -> Open -> Workspace
     * From the top of the RX63N project folder, open the .eww file located at:
-        `Micrium -> Example -> Renesas -> YRDKRX63N -> OS3-MQTT-SSL -> IAR - NoSource -> OS3-MQTT-SSL.eww`
+        ```Micrium -> Example -> Renesas -> YRDKRX63N -> OS3-MQTT-SSL -> IAR - NoSource -> OS3-MQTT-SSL.eww```
