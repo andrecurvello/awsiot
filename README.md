@@ -36,6 +36,7 @@ In order to run the Smart Home Gateway Demo on your own AWS account you need the
 * IAR Embedded Workbench for RX<sup>1</sup>. A free 30-day trial can be obtained [here](https://www.iar.com/iar-embedded-workbench/renesas/rx).
 * OpenSSL installed on your machine. Downloads available for [Win](https://www.openssl.org/community/binaries.html), [OS X](http://apple.stackexchange.com/questions/126830/how-to-upgrade-openssl-in-os-x) and Linux.
 * Bin2Header python script. Download [here](http://sourceforge.net/projects/bin2header/).
+* Mosquitto client found [here](http://mosquitto.org/download/). 
 * Contact Micrium [here](http://www.micrium.com/aws-iot-starter-kit) to obtain the Smart Home Gateway software.
 
 <sup>1</sup>IAR is only available on Windows. 
@@ -123,4 +124,25 @@ AWS IoT requires every device that connects to provide a signed X.509 certificat
 
 6. Checking your connection to AWS IoT
     
-    At the bottom of the LCD screen on the RX63N it may read `MQTT Not Connected` initially. Once connected to AWS IoT that message will be replaced with `Pub: 0 Sub: 0` to show you how many MQTT messages have been published and received. If that message persists longer than 15-30 seconds then there is an issue with your certificates. You'll want to go back and make sure they were converted to an array correctly and added to the IAR project correctly. If your issues persist feel free to reach out to us at Micrium. Our contact info can be found [here](http://micrium.com/about/contact/). 
+    At the bottom of the LCD screen on the RX63N it may read `MQTT Not Connected` initially. Once connected to AWS IoT that message will be replaced with `Pub: 0 Sub: 0` to show you how many MQTT messages have been published and received. If that message persists longer than 15-30 seconds then there is an issue with your certificates. You'll want to go back and make sure they were converted to an array correctly and added to the IAR project correctly. 
+    
+    One trouble shooting step you can take is using the mosquitto_sub and mosquitto_pub tools to attempt to publish a message to AWS IoT from your computer to make sure the certificate is valid and able to publish. Those commands would be:
+    ```
+    mosquitto_sub --cafile rootCA.pem --cert cert.pem --key privkey.pem -h data.iot.us-east-1.amazonaws.com -p 8883 -d -q 1 -t test/topic 
+    mosquitto_pub --cafile rootCA.pem --cert cert.pem --key privkey.pem -h data.iot.us-east-1.amazonaws.com -p 8883 -d -q 1 -t test/topic -m "Hello World!"
+    ```
+    After executing these commands you should see `Hello World` published to the mosquitto_sub client.
+    
+    If your issues persist feel free to reach out to us at Micrium. Our contact info can be found [here](http://micrium.com/about/contact/).
+
+    One 
+
+## Viewing the data being sent to AWS IoT
+
+We can use the Mosquitto clients to view the data the RX63N is sending to AWS IoT. In a termial window you'll want to execute the following command:
+```
+mosquitto_sub --cafile rootCA.pem --cert cert.pem --key privkey.pem -h data.iot.us-east-1.amazonaws.com -p 8883 -d -q 1 -t com.ucos/#
+```
+
+This command will receive all messages sent to the `com.ucos` topic.
+
