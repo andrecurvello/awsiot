@@ -238,7 +238,7 @@ This command will receive all messages sent to the `com.ucos` topic. Messages ar
 
 We can also use the Mosquitto client to send data. In a terminal window you'll want to execute the following command (be sure to replace   `001122334455` with your board's MAC address):
 ```
-mosquitto_sub --cafile rootCA.pem --cert cert.pem --key privkey.pem -h data.iot.us-east-1.amazonaws.com -p 8883 -d -q 1 -t MQTT-TOPIC -m JSON-PAYLOAD
+mosquitto_pub --cafile rootCA.pem --cert cert.pem --key privkey.pem -h data.iot.us-east-1.amazonaws.com -p 8883 -d -q 1 -t MQTT-TOPIC -m JSON-PAYLOAD
 
 Turn on the dishwasher:
 MQTT-TOPIC: com.ucos/appliance/cmd/001122334455
