@@ -144,5 +144,7 @@ We can use the Mosquitto clients to view the data the RX63N is sending to AWS Io
 mosquitto_sub --cafile rootCA.pem --cert cert.pem --key privkey.pem -h data.iot.us-east-1.amazonaws.com -p 8883 -d -q 1 -t com.ucos/#
 ```
 
-This command will receive all messages sent to the `com.ucos` topic.
+This command will receive all messages sent to the `com.ucos` topic. Messages are sent every 15 seconds unless you interact with the demo. The image below shows you the options you have for interacting with the Smart Home Gateway:
+![YRDKRX63N Interactions](./img/yrdkrx63n_interactions.png)
+
 
