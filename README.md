@@ -11,8 +11,7 @@ The Renesas RX63N AWS IoT Starter Kit has the following contents:
 
 
 ## Smart Home Gateway Overview
-
-The Smart Home Gateway simulation shows how the RX63N could be used as a gateway device to handle the interaction between appliances and temperature sensors to AWS IoT. The idea is an appliance or temperature sensor may have Personal Area Network connection (Bluetooth, ZigBee, Wireless USB, etc.) instead of a Local Area Network connection that provides a connection to the internet. This gateway would be the connection point all of the devices on the PAN to connect to the internet. In the Smart Home Gateway the PAN is simulated by the buttons and potentiometer on the YRDKRX63N. 
+The Smart Home Gateway Demo simulates a whole-home application connected to AWS IoT, utilizing an RX63N as the gateway device that handles the interaction between sensors in a home. The idea is an appliance or temperature sensor may have Personal Area Network connection (Bluetooth, ZigBee, Wireless USB, etc.) instead of a Local Area Network connection that provides a connection to the internet. This gateway would be the connection point all of the devices on the PAN to connect to the internet. In the Smart Home Gateway the PAN is simulated by the buttons and potentiometer on the YRDKRX63N. 
 
 The connection between the YRDKRX63N and AWS IoT is done via a protocol call MQTT. More information on MQTT can be found on the AWS IoT website, as well as [here](http://www.mqtt.org).
 
