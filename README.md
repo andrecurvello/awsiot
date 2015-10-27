@@ -20,6 +20,12 @@ The Smart Home Gateway has a few different components to it. Currently three fea
 * Temperature sensors
 * Alarms
 
+### Hardware Interaction
+The image below shows you the options you have for interacting with the Smart Home Gateway simulation:
+![YRDKRX63N Interactions](./img/yrdkrx63n_interactions.png)
+
+Anytime you change an appliance state or temperature value on the RX63N that change is immediately sent to AWS IoT. 
+
 ### Appliances
 The Smart Home Gateway simulation has three appliances: Dishwasher, Lamp and a Dryer. As shown in the image in the Hardware Interactions section below, you can scroll through the appliances and change their state using Switch 1 and Switch 2 on the YRDKRX63N. Anytime an appliance’s state is changed a MQTT message is immediately published to AWS IoT. 
 
@@ -29,11 +35,6 @@ The Smart Home Gateway simulation also has three temperature sensors: Kitchen, F
 ### Alarms
 The alarms in the Smart Home Gateway are directly related to the temperature sensors. You can set a low and high trigger value for each of the temperature sensors, so if a temperature drops below the low trigger or goes above the high trigger the alarm is set to active. The user has the ability to set a silence flag on an alarm so the alarm no longer shows as active. Once the temperature value returns to a non-alarm value, the active and silence flags are automatically cleared. 
 
-### Hardware Interaction
-The image below shows you the options you have for interacting with the Smart Home Gateway simulation:
-![YRDKRX63N Interactions](./img/yrdkrx63n_interactions.png)
-
-Anytime you change an appliance state or temperature value on the RX63N that change is immediately sent to AWS IoT. 
 
 ## Prerequisites
 
