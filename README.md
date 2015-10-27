@@ -57,3 +57,5 @@ In order to run the Smart Home Gateway Demo on your own AWS account you need the
 
     * Click the Download and Debug button ![Download and Debug button](./img/iar_download_debug_btn.png). If prompted to upgrade the firmware or setup the hardware, click ok.
 
+    * Once the screen has changed to the debugging view and it pauses with `main()` highlighted, click to Go button in the top left corner to run the program:
+    ![IAR Go Button](./img/iar_go.png)
