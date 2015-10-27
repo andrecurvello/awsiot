@@ -38,8 +38,10 @@ In order to run the Smart Home Gateway Demo on your own AWS account you need the
 * Bin2Header python script. Download [here](http://sourceforge.net/projects/bin2header/).
 * Mosquitto client found [here](http://mosquitto.org/download/). 
 * Contact Micrium [here](http://www.micrium.com/aws-iot-starter-kit) to obtain the Smart Home Gateway software.
+* NodeJS and a Web Server (Apache/Ngix/etc.)<sup>2</sup>
 
 <sup>1</sup>IAR is only available on Windows. 
+<sup>2</sup>Only required if you'd like to run the web portion of the Smart Home Gateway demo. 
 
 
 ## Importing and compiling the Smart Home Gateway project
@@ -135,9 +137,62 @@ AWS IoT requires every device that connects to provide a signed X.509 certificat
     
     If your issues persist feel free to reach out to us at Micrium. Our contact info can be found [here](http://micrium.com/about/contact/).
 
-    One 
 
-## Viewing the data being sent to AWS IoT
+## Interacting with the RX63N via Mosquitto
+
+### Smart Home Gateway topic organization
+
+The Smart Home Gateway uses `com.ucos` as the top level for all MQTT messages. The table below shows the rest of the topics:
+
+| Topic Name | Topic Value | Example |
+| --- | --- | --- | 
+| Appliance | appliance | com.ucos/appliance/001122334455 |
+| Temperature | temperature | com.ucos/temperature/001122334455 |
+| Alarm | alarm | com.ucos/alarm/001122334455 |
+
+Appliances:
+
+| Appliance Name | Topic Value |
+| --- | --- |
+| Dishwasher | dishwasher |
+| Lamp | lamp |
+| Dryer | dryer |
+
+Appliance Paramters:
+
+| Parameter | Values | Description |
+| --- | --- | --- |
+| state | 0-1 | 0 - Off, 1 - On |
+| milliamps | 0 - 1000 | Number of milliamps used since last transmit |
+
+Temperature Sensors:
+
+| Temperature Sensors | Topic Value |
+| --- | --- |
+| Family Room | family\_rm |
+| Kitchen | kitchen |
+| Garage | garage |
+
+Temperature Paramters:
+
+| Parameter | Values | Description |
+| --- | --- | --- |
+| F | 60-90 | Temp ranges from 60 - 90 degrees F |
+| humidity | 0 - 100 | Humidity in the room |
+
+Alarm Paramters:
+
+| Parameter | Values | Description |
+| --- | --- | --- |
+| low | 60-75 | Low alarm trigger |
+| high | 75-90 | High alarm trigger |
+| active | 0-1 | Active alarm state. 0 - Off, 1 - On |
+| silent | 0-1 | Silenced alarm state 0 - Off, 1 - On |
+
+
+
+
+
 
 We can use the Mosquitto clients to view the data the RX63N is sending to AWS IoT. In a termial window you'll want to execute the following command:
 ```
@@ -147,4 +202,6 @@ mosquitto_sub --cafile rootCA.pem --cert cert.pem --key privkey.pem -h data.iot.
 This command will receive all messages sent to the `com.ucos` topic. Messages are sent every 15 seconds unless you interact with the demo. The image below shows you the options you have for interacting with the Smart Home Gateway:
 ![YRDKRX63N Interactions](./img/yrdkrx63n_interactions.png)
 
+Anytime you change an appliance state or temperature value on the RX63N that change is immediately sent to AWS IoT. 
 
+We can also use the Mosquitto client to send data 
