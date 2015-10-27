@@ -70,7 +70,7 @@ In order to run the Smart Home Gateway Demo on your own AWS account you need the
 
 ## Downloading and converting X.509 certificates from AWS IoT
 
-AWS IoT requires every device that connects to provide a signed X.509 certificate in order to connect. For the Smart Home Gateway to connect we use [Micrium's TCP/IP stack](http://micrium.com/rtos/uctcpip/overview/) and [Mocana's NanoSSL stack](https://www.mocana.com/iot-security/nanossl) to connect directly to AWS IoT.
+AWS IoT requires every device to provide a signed X.509 certificate in order to connect. Thie Smart Home Gateway uses [Micrium's TCP/IP stack](http://micrium.com/rtos/uctcpip/overview/) and [Mocana's NanoSSL stack](https://www.mocana.com/iot-security/nanossl) to connect directly to AWS IoT.
 
 
 1. Generate a certificate in AWS IoT
