@@ -144,7 +144,7 @@ AWS IoT requires that every device wanting to connect provide a signed X.509 for
 
 ## Smart Home Gateway topic organization
 
-The Smart Home Gateway uses `com.ucos` as the top level for all MQTT messages. The last level of all MQTT topics in the Smart Home Gateway is the MAC address of the board. Using the MAC address gives us a unique way to identify each board. All data sent from the RX63N to AWS IoT uses a three level topic: `com.ucos/specific-topic/001122334455` where `001122334455` would be the board's MAC address. 
+The Smart Home Gateway uses `com.ucos` as the top level for all MQTT messages. All messages sent from the RX63N to AWS IoT use a three-level topic where the last level topic would be a board's unique MAC Address. For example, the following topic `com.ucos/specific-topic/001122334455` would communicate the 'specific-topic' to the board with the 001122334455 MAC address.
 
 On a few of the topics, you can command the Smart Home Gateway to do things like turn off or on an appliance, or set an alarm value. To command the RX63N you add a command topic level such as: `com.ucos/specific-topic/cmd/001122334455`. More details on which topics can be commanded are shown below.
 
