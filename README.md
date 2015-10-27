@@ -22,7 +22,7 @@ The Smart Home Gateway has a few different components to it. Currently two featu
 In the future the ability to trigger alarms based on the temperature sensor values will be implemented, as well as more control over how often messages are sent. 
 
 ### Appliances
-The Smart Home Gateway simulation has three apliances: Dishwasher, Lamp and a Dryer. As shown in the image above you can scroll through the appliances and change their state using Switch 1 and Switch 2 on the YRDKRX63N. Anytime an appliance’s state is changed a MQTT message is immediatley published to AWS IoT. 
+The Smart Home Gateway simulation has three appliances: Dishwasher, Lamp and a Dryer. As shown in the image above you can scroll through the appliances and change their state using Switch 1 and Switch 2 on the YRDKRX63N. Anytime an appliance’s state is changed a MQTT message is immediately published to AWS IoT. 
 
 
 ### Temperature Sensors
@@ -75,14 +75,14 @@ AWS IoT requires every device that connects to provide a signed X.509 certificat
         
 2. Download the root CA certificate file
 
-    The secure connection between AWS IoT and the RX63N requires Amazon to send us a certificate in addition to us sending Amazon a certificate. In order for us to validate the certificate Amazon sends us we need to hae a root certificate to validate the certificate against. The root certificate in this case is signed by Symantec and can be downloaded from [here](https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem). You should save this file to the same directory as the keys and certificate from Amazon as it will also have to be converted to the correct format. 
+    The secure connection between AWS IoT and the RX63N requires Amazon to send us a certificate in addition to us sending Amazon a certificate. In order for us to validate the certificate Amazon sends us we need to have a root certificate to validate the certificate against. The root certificate in this case is signed by Symantec and can be downloaded from [here](https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem). You should save this file to the same directory as the keys and certificate from Amazon as it will also have to be converted to the correct format. 
 
 3. Activate the certificate and add a policy
 
     More detailed information on this can be found in AWS IoT's documentation [here](http://docs.aws.amazon.com/iot/latest/developerguide/what-is-aws-iot.html). 
     * Click on the checkbox under your certificate, then under the actions dropdown click activate.
 
-    * Go back up to the `+ Create a resource` at the top and click on `Create a policy`. For simplification of this getting started guide we're creating a polciy that allows the certificate full access to all of AWS IoT's features. Fill out the policy form with the following paramters:
+    * Go back up to the `+ Create a resource` at the top and click on `Create a policy`. For simplification of this getting started guide we're creating a policy that allows the certificate full access to all of AWS IoT's features. Fill out the policy form with the following parameters:
         * Name: PubSubToAnyTopic
         * Action: iot.\*
         * Resource: \*
@@ -113,7 +113,7 @@ AWS IoT requires every device that connects to provide a signed X.509 certificat
     bin2header privkey.der
     ```
 
-    * Copy the array values from each of the header files it generates into the appropriate array in `cert.h`. You can find cert.h in IAR under the APP folder:
+    * Copy the array values from each of the header files it generates into the appropriate array in `cert.h`. You can find `cert.h` in IAR under the APP folder:
     ![IAR cert.h](./img/iar_cert.png)
 
 5. Recompile and flash the RX63N
@@ -122,4 +122,4 @@ AWS IoT requires every device that connects to provide a signed X.509 certificat
     * When the debug window appears click the go button.
 
 6. Checking your connection to AWS IoT
-    
+    At the bottom of the LCD screen on the RX63N it may read MQTT Not Connected initially. Once connected to AWS IoT that message will be replaced with `Pub: 0 Sub: 0` to show you how many MQTT messages have been published and received. If that message persists longer than 15-30 seconds then there is an issue with your certificates. You'll want to go back and make sure they were converted to an array correctly and added to the IAR project correctly. If your issues persist feel free to reach out to us at Micrium. Our contact info can be found [here](http://micrium.com/about/contact/). 
