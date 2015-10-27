@@ -105,3 +105,21 @@ AWS IoT requires every device that connects to provide a signed X.509 certificat
     ```
     openssl rsa -outform der -in privkey.pem -out privkey.der
     ```
+
+    * Still on the terminal window, use the bin2header python script to create a header file from each DER file.
+    ```
+    bin2header rootCA.der
+    bin2header cert.der
+    bin2header privkey.der
+    ```
+
+    * Copy the array values from each of the header files it generates into the appropriate array in `cert.h`. You can find cert.h in IAR under the APP folder:
+    ![IAR cert.h](./img/iar_cert.png)
+
+5. Recompile and flash the RX63N
+    * Just as before, right click on `OS3-MQTT-SSL` and click `Rebuild All`.
+    * Once the build is finished click the Download and Debug button ![Download and Debug button](./img/iar_download_debug_btn.png). If prompted to upgrade the firmware or setup the hardware, click ok.
+    * When the debug window appears click the go button.
+
+6. Checking your connection to AWS IoT
+    
