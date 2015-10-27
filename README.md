@@ -45,10 +45,15 @@ In order to run the Smart Home Gateway Demo on your own AWS account you need the
 
 1. Import the Smart Home Gateway project into IAR
     * Navigate to File -> Open -> Workspace
+
     * From the top of the RX63N project folder, open the .eww file located at:
     ![Micrium -> Example -> Renesas -> YRDKRX63N -> OS3-MQTT-SSL -> IAR - NoSource -> OS3-MQTT-SSL.eww](./img/iar_path.png)
-    * Right click on the project name `OS3-MQTT-SSL - FLASH` then click Rebuild All.
+
+    * Right click on the project name `OS3-MQTT-SSL - FLASH` then click `Rebuild All`:
     ![Found on the left side of IAR](./img/iar_rebuild.png)
+
     * After the project finishes building, plug in your ethernet cable to the YRDKRX63N, and then plug in the USB to the J-Link USB as shown below.
     ![Ethernet and USB connections](./img/yrdkrx63n_connections.png)
+
+    * Click the Download and Debug button ![Download and Debug button](./img/iar_download_debug_btn.png). If prompted to upgrade the firmware or setup the hardware, click ok.
 
