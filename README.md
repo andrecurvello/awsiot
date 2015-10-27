@@ -21,7 +21,7 @@ The Smart Home Gateway has a few different components to it. Currently three fea
 * Alarms
 
 ### Appliances
-The Smart Home Gateway simulation has three appliances: Dishwasher, Lamp and a Dryer. As shown in the image above you can scroll through the appliances and change their state using Switch 1 and Switch 2 on the YRDKRX63N. Anytime an appliance’s state is changed a MQTT message is immediately published to AWS IoT. 
+The Smart Home Gateway simulation has three appliances: Dishwasher, Lamp and a Dryer. As shown in the image in the Hardware Interactions section below, you can scroll through the appliances and change their state using Switch 1 and Switch 2 on the YRDKRX63N. Anytime an appliance’s state is changed a MQTT message is immediately published to AWS IoT. 
 
 ### Temperature Sensors
 The Smart Home Gateway simulation also has three temperature sensors: Kitchen, Family Room and Garage. You can change the temperature sensor using Switch 3, and you can use the potentiometer to change the actual temperature value. Similar to the appliances, any time a temperature value is changed it is immediately published to AWS IoT.
