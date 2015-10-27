@@ -72,7 +72,11 @@ AWS IoT requires every device that connects to provide a signed X.509 certificat
 
 * If you have a CSR you'd like signed, now is the time you can upload one otherwise click `1-Click Certificate Create`. This will provide you with a certificate, public key and private key. You should download all three of them.
 
-2. Activate the certificate and add a policy
+2. Download the root CA certificate file
+
+The secure connection between AWS IoT and the RX63N requires Amazon to send us a certificate in addition to us sending Amazon a certificate. In order for us to validate the certificate Amazon sends us we need to hae a root certificate to validate the certificate against. The root certificate in this case is signed by Symantec and can be downloaded from [here](https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem). You should save this file to the same directory as the keys and certificate from Amazon as it will also have to be converted to the correct format. 
+
+3. Activate the certificate and add a policy
 
 More detailed information on this can be found in AWS IoT's documentation [here](http://docs.aws.amazon.com/iot/latest/developerguide/what-is-aws-iot.html). 
 
@@ -83,3 +87,22 @@ More detailed information on this can be found in AWS IoT's documentation [here]
     * Action: iot.\*
     * Resource: \*
 ![Create a policy](./img/aws_create_policy.png)
+
+* Go back and click the checkbox on the certificate you created. On the Actions dropdown click `Attach a policy`. Enter the name of your policy (PubSubToAnyTopic). 
+
+4. Convert the certificate to a header file
+
+In order for Mocana's NanoSSL library to be able to use the certificates from Amazon and Symantec we need to convert them from ASCII (PEM) to binary (DER). Once we have our binary certificates we will create three array's that will be loaded into our Smart Home Gateway project. 
+
+* In a terminal window, navigate to the directory that has the certificates and keys. 
+
+* First convert the two PEM certificates (AWS IoT cert and root CA) to DER using OpenSSL:
+```
+openssl x509 -outform der -in rootCA.pem -out rootCA.der
+openssl x509 -outform der -in AWSIoT.pem -out AWSIoT.der
+```
+
+* Next convert the private key to DER format as well using OpenSSL:
+```
+openssl rsa -outform der -in privkey.pem -out privkey.der
+```
