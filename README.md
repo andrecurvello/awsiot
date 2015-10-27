@@ -138,9 +138,7 @@ AWS IoT requires every device that connects to provide a signed X.509 certificat
     If your issues persist feel free to reach out to us at Micrium. Our contact info can be found [here](http://micrium.com/about/contact/).
 
 
-## Interacting with the RX63N via Mosquitto
-
-### Smart Home Gateway topic organization
+## Smart Home Gateway topic organization
 
 The Smart Home Gateway uses `com.ucos` as the top level for all MQTT messages. The last level of all MQTT topics in the Smart Home Gateway is the MAC address of the board. Using the MAC address gives us a uniquie way to identify each board. All data sent from the RX63N to AWS IoT uses a three level topic: `com.ucos/specific-topic/001122334455` where `001122334455` would be the board's MAC address. 
 
@@ -222,6 +220,11 @@ Topic: com.ucos/alarm/cmd/001122334455
 Payload: {"kitchen" : {"low" : "65", "high" : "85"}}
 ```
 
+
+## Interacting with the RX63N via Mosquitto
+
+### Subscribing to SHG data via Mosquitto
+
 We can use the Mosquitto clients to view the data the RX63N is sending to AWS IoT. In a termial window you'll want to execute the following command:
 ```
 mosquitto_sub --cafile rootCA.pem --cert cert.pem --key privkey.pem -h data.iot.us-east-1.amazonaws.com -p 8883 -d -q 1 -t com.ucos/#
@@ -232,4 +235,18 @@ This command will receive all messages sent to the `com.ucos` topic. Messages ar
 
 Anytime you change an appliance state or temperature value on the RX63N that change is immediately sent to AWS IoT. 
 
-We can also use the Mosquitto client to send data 
+### Publishing data to the SHG via Mosquitto
+
+We can also use the Mosquitto client to send data. In a terminal window you'll want to execute the following command (be sure to replace   `001122334455` with your board's MAC address):
+```
+mosquitto_sub --cafile rootCA.pem --cert cert.pem --key privkey.pem -h data.iot.us-east-1.amazonaws.com -p 8883 -d -q 1 -t MQTT-TOPIC -m JSON-PAYLOAD
+
+Turn on the dishwasher:
+MQTT-TOPIC: com.ucos/appliance/cmd/001122334455
+JSON-PAYLOAD: {"dishwasher" : {"state" : "1"}} 
+
+Set the garage low alarm trigger:
+MQTT-TOPIC: com.ucos/alarm/cmd/001122334455
+JSON-PAYLOAD: {"garage" : {"low" : "65"}} 
+```
+
