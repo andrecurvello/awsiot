@@ -150,7 +150,7 @@ The Smart Home Gateway uses `com.ucos` as the top level for all MQTT messages. T
 | Temperature | temperature | com.ucos/temperature/001122334455 |
 | Alarm | alarm | com.ucos/alarm/001122334455 |
 
-Appliances:
+**Appliances:**
 
 | Appliance Name | Topic Value |
 | --- | --- |
@@ -158,14 +158,21 @@ Appliances:
 | Lamp | lamp |
 | Dryer | dryer |
 
-Appliance Paramters:
+**Appliance Paramters:**
 
 | Parameter | Values | Description |
 | --- | --- | --- |
 | state | 0-1 | 0 - Off, 1 - On |
 | milliamps | 0 - 1000 | Number of milliamps used since last transmit |
 
-Temperature Sensors:
+**Appliance Examples**
+
+```
+Topic: com.ucos/appliance/001122334455
+Payload: {"dishwasher": {"state" : "0", "milliamps" : "5"}}
+```
+
+**Temperature Sensors:**
 
 | Temperature Sensors | Topic Value |
 | --- | --- |
@@ -173,14 +180,14 @@ Temperature Sensors:
 | Kitchen | kitchen |
 | Garage | garage |
 
-Temperature Paramters:
+**Temperature Paramters:**
 
 | Parameter | Values | Description |
 | --- | --- | --- |
 | F | 60-90 | Temp ranges from 60 - 90 degrees F |
 | humidity | 0 - 100 | Humidity in the room |
 
-Alarm Paramters:
+**Alarm Paramters:**
 
 | Parameter | Values | Description |
 | --- | --- | --- |
@@ -189,8 +196,14 @@ Alarm Paramters:
 | active | 0-1 | Active alarm state. 0 - Off, 1 - On |
 | silent | 0-1 | Silenced alarm state 0 - Off, 1 - On |
 
+**Temperature and Alarm Examples:**
+```
+Topic: com.ucos/temperature/001122334455
+Payload: {"kitchen" : {"F" : "75", "humidity" : "35"}}
 
-
+Topic: com.ucos/alarm/001122334455
+Payload: {"kitchen" : {"low" : "63", "high" : "88", "active" : "0", "silent" : "0"}}
+```
 
 
 
