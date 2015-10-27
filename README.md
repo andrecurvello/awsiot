@@ -24,10 +24,14 @@ In the future the ability to trigger alarms based on the temperature sensor valu
 ### Appliances
 The Smart Home Gateway simulation has three appliances: Dishwasher, Lamp and a Dryer. As shown in the image above you can scroll through the appliances and change their state using Switch 1 and Switch 2 on the YRDKRX63N. Anytime an appliance’s state is changed a MQTT message is immediately published to AWS IoT. 
 
-
 ### Temperature Sensors
 The Smart Home Gateway simulation also has three temperature sensors: Kitchen, Family Room and Garage. You can change the temperature sensor using Switch 3, and you can use the potentiometer to change the actual temperature value. Similar to the appliances, any time a temperature value is changed it is immediately published to AWS IoT.
 
+### Hardware Interaction
+The image below shows you the options you have for interacting with the Smart Home Gateway simulation:
+![YRDKRX63N Interactions](./img/yrdkrx63n_interactions.png)
+
+Anytime you change an appliance state or temperature value on the RX63N that change is immediately sent to AWS IoT. 
 
 ## Prerequisites
 
@@ -230,10 +234,7 @@ We can use the Mosquitto clients to view the data the RX63N is sending to AWS Io
 mosquitto_sub --cafile rootCA.pem --cert cert.pem --key privkey.pem -h data.iot.us-east-1.amazonaws.com -p 8883 -d -q 1 -t com.ucos/#
 ```
 
-This command will receive all messages sent to the `com.ucos` topic. Messages are sent every 15 seconds unless you interact with the demo. The image below shows you the options you have for interacting with the Smart Home Gateway:
-![YRDKRX63N Interactions](./img/yrdkrx63n_interactions.png)
-
-Anytime you change an appliance state or temperature value on the RX63N that change is immediately sent to AWS IoT. 
+This command will receive all messages sent to the `com.ucos` topic. Messages are sent every 15 seconds unless you interact with the hardware via buttons or potentiometer.
 
 ### Publishing data to the SHG via Mosquitto
 
