@@ -142,13 +142,17 @@ AWS IoT requires every device that connects to provide a signed X.509 certificat
 
 ### Smart Home Gateway topic organization
 
-The Smart Home Gateway uses `com.ucos` as the top level for all MQTT messages. The table below shows the rest of the topics:
+The Smart Home Gateway uses `com.ucos` as the top level for all MQTT messages. The last level of all MQTT topics in the Smart Home Gateway is the MAC address of the board. Using the MAC address gives us a uniquie way to identify each board. All data sent from the RX63N to AWS IoT uses a three level topic: `com.ucos/specific-topic/001122334455` where `001122334455` would be the board's MAC address. 
 
-| Topic Name | Topic Value | Example |
-| --- | --- | --- | 
-| Appliance | appliance | com.ucos/appliance/001122334455 |
-| Temperature | temperature | com.ucos/temperature/001122334455 |
-| Alarm | alarm | com.ucos/alarm/001122334455 |
+On a few of the topics, you can command the Smart Home Gateway to do things like turn off or on an appliance, or set an alarm value. To command the RX63N you add a command topic level such as: `com.ucos/specific-topic/cmd/001122334455`. More details on which topics can be commanded are shown below.
+
+The table below shows the rest of the topics:
+
+| Topic Name | Topic Value | Accepts Commands | Example |
+| --- | --- | --- | --- |
+| Appliance | appliance | Yes | com.ucos/appliance/001122334455 |
+| Temperature | temperature | No | com.ucos/temperature/001122334455 |
+| Alarm | alarm | Yes | com.ucos/alarm/001122334455 |
 
 **Appliances:**
 
@@ -160,16 +164,20 @@ The Smart Home Gateway uses `com.ucos` as the top level for all MQTT messages. T
 
 **Appliance Paramters:**
 
-| Parameter | Values | Description |
+| Parameter | Values | Cmd | Description |
 | --- | --- | --- |
-| state | 0-1 | 0 - Off, 1 - On |
-| milliamps | 0 - 1000 | Number of milliamps used since last transmit |
+| state | 0-1 | Yes | 0 - Off, 1 - On |
+| milliamps | 0 - 1000 | No |Number of milliamps used since last transmit |
+
 
 **Appliance Examples**
 
 ```
 Topic: com.ucos/appliance/001122334455
-Payload: {"dishwasher": {"state" : "0", "milliamps" : "5"}}
+Payload: {"dishwasher" : {"state" : "0", "milliamps" : "5"}}
+
+Topic: com.ucos/appliance/cmd/001122334455
+Payload: {"dishwasher" : {"state" : "1"}}
 ```
 
 **Temperature Sensors:**
@@ -182,19 +190,19 @@ Payload: {"dishwasher": {"state" : "0", "milliamps" : "5"}}
 
 **Temperature Paramters:**
 
-| Parameter | Values | Description |
-| --- | --- | --- |
-| F | 60-90 | Temp ranges from 60 - 90 degrees F |
-| humidity | 0 - 100 | Humidity in the room |
+| Parameter | Values | Cmd | Description |
+| --- | --- | --- | --- |
+| F | 60-90 | No | Temp ranges from 60 - 90 degrees F |
+| humidity | 0 - 100 | No | Humidity in the room |
 
 **Alarm Paramters:**
 
-| Parameter | Values | Description |
-| --- | --- | --- |
-| low | 60-75 | Low alarm trigger |
-| high | 75-90 | High alarm trigger |
-| active | 0-1 | Active alarm state. 0 - Off, 1 - On |
-| silent | 0-1 | Silenced alarm state 0 - Off, 1 - On |
+| Parameter | Values | Cmd | Description |
+| --- | --- | --- | --- |
+| low | 60-75 | Yes | Low alarm trigger |
+| high | 75-90 | Yes | High alarm trigger |
+| active | 0-1 | No | Active alarm state. 0 - Off, 1 - On |
+| silent | 0-1 | Yes | Silenced alarm state 0 - Off, 1 - On |
 
 **Temperature and Alarm Examples:**
 ```
@@ -203,6 +211,9 @@ Payload: {"kitchen" : {"F" : "75", "humidity" : "35"}}
 
 Topic: com.ucos/alarm/001122334455
 Payload: {"kitchen" : {"low" : "63", "high" : "88", "active" : "0", "silent" : "0"}}
+
+Topic: com.ucos/alarm/cmd/001122334455
+Payload: {"kitchen" : {"low" : "65", "high" : "85"}}
 ```
 
 
