@@ -146,13 +146,14 @@ The Smart Home Gateway uses `com.ucos` as the top level for all MQTT messages. T
 
 On a few of the topics, you can command the Smart Home Gateway to do things like turn off or on an appliance, or set an alarm value. To command the RX63N you add a command topic level such as: `com.ucos/specific-topic/cmd/001122334455`. More details on which topics can be commanded are shown below.
 
-The table below shows the rest of the topics:
+**SHG Topics:**
 
 | Topic Name | Topic Value | Accepts Commands | Example |
 | --- | --- | --- | --- |
 | Appliance | appliance | Yes | com.ucos/appliance/001122334455 |
 | Temperature | temperature | No | com.ucos/temperature/001122334455 |
 | Alarm | alarm | Yes | com.ucos/alarm/001122334455 |
+
 
 **Appliances:**
 
@@ -161,6 +162,7 @@ The table below shows the rest of the topics:
 | Dishwasher | dishwasher |
 | Lamp | lamp |
 | Dryer | dryer |
+
 
 **Appliance Paramters:**
 
@@ -180,6 +182,7 @@ Topic: com.ucos/appliance/cmd/001122334455
 Payload: {"dishwasher" : {"state" : "1"}}
 ```
 
+
 **Temperature Sensors:**
 
 | Temperature Sensors | Topic Value |
@@ -188,12 +191,14 @@ Payload: {"dishwasher" : {"state" : "1"}}
 | Kitchen | kitchen |
 | Garage | garage |
 
+
 **Temperature Paramters:**
 
 | Parameter | Values | Cmd | Description |
 | --- | --- | --- | --- |
 | F | 60-90 | No | Temp ranges from 60 - 90 degrees F |
 | humidity | 0 - 100 | No | Humidity in the room |
+
 
 **Alarm Paramters:**
 
@@ -203,6 +208,7 @@ Payload: {"dishwasher" : {"state" : "1"}}
 | high | 75-90 | Yes | High alarm trigger |
 | active | 0-1 | No | Active alarm state. 0 - Off, 1 - On |
 | silent | 0-1 | Yes | Silenced alarm state 0 - Off, 1 - On |
+
 
 **Temperature and Alarm Examples:**
 ```
@@ -215,8 +221,6 @@ Payload: {"kitchen" : {"low" : "63", "high" : "88", "active" : "0", "silent" : "
 Topic: com.ucos/alarm/cmd/001122334455
 Payload: {"kitchen" : {"low" : "65", "high" : "85"}}
 ```
-
-
 
 We can use the Mosquitto clients to view the data the RX63N is sending to AWS IoT. In a termial window you'll want to execute the following command:
 ```
