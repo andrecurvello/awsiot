@@ -42,10 +42,8 @@ In order to run the Smart Home Gateway Demo on your own AWS account you need the
 * Bin2Header python script. Download [here](http://sourceforge.net/projects/bin2header/).
 * Mosquitto client found [here](http://mosquitto.org/download/). 
 * Contact Micrium [here](http://www.micrium.com/aws-iot-starter-kit) to obtain the Smart Home Gateway software.
-* NodeJS and a Web Server (Apache/Ngix/etc.)<sup>2</sup>
 
 <sup>1</sup>IAR is only available on Windows. 
-<sup>2</sup>Only required if you'd like to run the web portion of the Smart Home Gateway demo. 
 
 
 ## Importing and compiling the Smart Home Gateway project
@@ -144,7 +142,7 @@ AWS IoT requires every device that connects to provide a signed X.509 certificat
 
 ## Smart Home Gateway topic organization
 
-The Smart Home Gateway uses `com.ucos` as the top level for all MQTT messages. The last level of all MQTT topics in the Smart Home Gateway is the MAC address of the board. Using the MAC address gives us a uniquie way to identify each board. All data sent from the RX63N to AWS IoT uses a three level topic: `com.ucos/specific-topic/001122334455` where `001122334455` would be the board's MAC address. 
+The Smart Home Gateway uses `com.ucos` as the top level for all MQTT messages. The last level of all MQTT topics in the Smart Home Gateway is the MAC address of the board. Using the MAC address gives us a unique way to identify each board. All data sent from the RX63N to AWS IoT uses a three level topic: `com.ucos/specific-topic/001122334455` where `001122334455` would be the board's MAC address. 
 
 On a few of the topics, you can command the Smart Home Gateway to do things like turn off or on an appliance, or set an alarm value. To command the RX63N you add a command topic level such as: `com.ucos/specific-topic/cmd/001122334455`. More details on which topics can be commanded are shown below.
 
@@ -166,7 +164,7 @@ On a few of the topics, you can command the Smart Home Gateway to do things like
 | Dryer | dryer |
 
 
-**Appliance Paramters:**
+**Appliance Parameters:**
 
 | Parameter | Values | Cmd | Description |
 | --- | --- | --- |
@@ -194,7 +192,7 @@ Payload: {"dishwasher" : {"state" : "1"}}
 | Garage | garage |
 
 
-**Temperature Paramters:**
+**Temperature Parameters:**
 
 | Parameter | Values | Cmd | Description |
 | --- | --- | --- | --- |
@@ -202,7 +200,7 @@ Payload: {"dishwasher" : {"state" : "1"}}
 | humidity | 0 - 100 | No | Humidity in the room |
 
 
-**Alarm Paramters:**
+**Alarm Parameters:**
 
 | Parameter | Values | Cmd | Description |
 | --- | --- | --- | --- |
@@ -229,7 +227,7 @@ Payload: {"kitchen" : {"low" : "65", "high" : "85"}}
 
 ### Subscribing to SHG data via Mosquitto
 
-We can use the Mosquitto clients to view the data the RX63N is sending to AWS IoT. In a termial window you'll want to execute the following command:
+We can use the Mosquitto clients to view the data the RX63N is sending to AWS IoT. In a terminal window you'll want to execute the following command:
 ```
 mosquitto_sub --cafile rootCA.pem --cert cert.pem --key privkey.pem -h data.iot.us-east-1.amazonaws.com -p 8883 -d -q 1 -t com.ucos/#
 ```
