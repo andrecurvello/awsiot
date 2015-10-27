@@ -16,16 +16,19 @@ The Smart Home Gateway simulation shows how the RX63N could be used as a gateway
 
 The connection between the YRDKRX63N and AWS IoT is done via a protocol call MQTT. More information on MQTT can be found on the AWS IoT website, as well as [here](http://www.mqtt.org).
 
-The Smart Home Gateway has a few different components to it. Currently two features are implemented:
+The Smart Home Gateway has a few different components to it. Currently three features are implemented:
 * Appliances
 * Temperature sensors
-In the future the ability to trigger alarms based on the temperature sensor values will be implemented, as well as more control over how often messages are sent. 
+* Alarms
 
 ### Appliances
 The Smart Home Gateway simulation has three appliances: Dishwasher, Lamp and a Dryer. As shown in the image above you can scroll through the appliances and change their state using Switch 1 and Switch 2 on the YRDKRX63N. Anytime an appliance’s state is changed a MQTT message is immediately published to AWS IoT. 
 
 ### Temperature Sensors
 The Smart Home Gateway simulation also has three temperature sensors: Kitchen, Family Room and Garage. You can change the temperature sensor using Switch 3, and you can use the potentiometer to change the actual temperature value. Similar to the appliances, any time a temperature value is changed it is immediately published to AWS IoT.
+
+### Alarms
+The alarms in the Smart Home Gateway are directly related to the temperature sensors. You can set a low and high trigger value for each of the temperature sensors, so if a temperature drops below the low trigger or goes above the high trigger the alarm is set to active. The user has the ability to set a silence flag on an alarm so the alarm no longer shows as active. Once the temperature value returns to a non-alarm value, the active and silence flags are automatically cleared. 
 
 ### Hardware Interaction
 The image below shows you the options you have for interacting with the Smart Home Gateway simulation:
