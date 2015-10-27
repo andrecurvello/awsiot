@@ -70,8 +70,7 @@ In order to run the Smart Home Gateway Demo on your own AWS account you need the
 
 ## Downloading and converting X.509 certificates from AWS IoT
 
-AWS IoT requires every device to provide a signed X.509 certificate in order to connect. Thie Smart Home Gateway uses [Micrium's TCP/IP stack](http://micrium.com/rtos/uctcpip/overview/) and [Mocana's NanoSSL stack](https://www.mocana.com/iot-security/nanossl) to connect directly to AWS IoT.
-
+AWS IoT requires that every device wanting to connect provide a signed X.509 for authentication. To connect with AWS IoT, the Smart Home Gateway simulation uses both [Mocana's NanoSSL stack](https://www.mocana.com/iot-security/nanossl) for security and [Micrium's TCPIP stack](http://micrium.com/rtos/uctcpip/overview/) for communication. 
 
 1. Generate a certificate in AWS IoT
     * Navigate to [AWS IoT](https://aws.amazon.com/iot). Log in using your AWS account.
@@ -83,7 +82,7 @@ AWS IoT requires every device to provide a signed X.509 certificate in order to 
         
 2. Download the root CA certificate file
 
-    The secure connection between AWS IoT and the RX63N requires Amazon to send us a certificate in addition to us sending Amazon a certificate. In order for us to validate the certificate Amazon sends us we need to have a root certificate to validate the certificate against. The root certificate in this case is signed by Symantec and can be downloaded from [here](https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem). You should save this file to the same directory as the keys and certificate from Amazon as it will also have to be converted to the correct format. 
+    The secure connection between AWS IoT and the RX63N requires Amazon to send us a certificate in addition to us sending Amazon a certificate. The root certificate in this case is signed by Symantec and can be downloaded from [here](https://www.symantec.com/content/en/us/enterprise/verisign/roots/VeriSign-Class%203-Public-Primary-Certification-Authority-G5.pem). You should save this file to the same directory as the keys and certificate from Amazon as it will also have to be converted to the correct format. 
 
 3. Activate the certificate and add a policy
 
